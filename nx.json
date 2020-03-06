@@ -1,0 +1,22 @@
+{
+  "npmScope": "happynrwl",
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "monorepo-poc": {
+      "tags": []
+    },
+    "monorepo-poc-e2e": {
+      "tags": [],
+      "implicitDependencies": ["monorepo-poc"]
+    }
+  }
+}
