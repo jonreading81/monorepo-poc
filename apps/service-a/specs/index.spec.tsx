@@ -9,8 +9,13 @@ describe('Index', () => {
     expect(baseElement).toBeTruthy();
   });
 
-  it('should have a greeting as the title', () => {
+  it('should have the header text', () => {
     const { getByText } = render(<Index />);
-    expect(getByText('Welcome to monorepo-poc! [DEV]')).toBeTruthy();
+    expect(getByText('Header')).toBeTruthy();
+  });
+
+  it('should have the footer text', () => {
+    const { getByText } = render(<Index />);
+    expect(getByText('footer')).toBeTruthy();
   });
 });

@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('monorepo-poc', () => {
+describe('service-a', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
@@ -8,6 +8,6 @@ describe('monorepo-poc', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to monorepo-poc!');
+    getGreeting().contains('Welcome to service-a!');
   });
 });

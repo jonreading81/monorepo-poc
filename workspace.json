@@ -1,17 +1,17 @@
 {
   "version": 1,
   "projects": {
-    "monorepo-poc": {
-      "root": "apps/monorepo-poc",
-      "sourceRoot": "apps/monorepo-poc",
+    "service-a": {
+      "root": "apps/service-a",
+      "sourceRoot": "apps/service-a",
       "projectType": "application",
       "schematics": {},
       "architect": {
         "build": {
           "builder": "@nrwl/next:build",
           "options": {
-            "root": "apps/monorepo-poc",
-            "outputPath": "dist/apps/monorepo-poc"
+            "root": "apps/service-a",
+            "outputPath": "dist/apps/service-a"
           },
           "configurations": {
             "production": {
@@ -27,12 +27,12 @@
         "serve": {
           "builder": "@nrwl/next:dev-server",
           "options": {
-            "buildTarget": "monorepo-poc:build",
+            "buildTarget": "service-a:build",
             "dev": true
           },
           "configurations": {
             "production": {
-              "buildTarget": "monorepo-poc:build:production",
+              "buildTarget": "service-a:build:production",
               "dev": false
             }
           }
@@ -40,46 +40,46 @@
         "export": {
           "builder": "@nrwl/next:export",
           "options": {
-            "buildTarget": "monorepo-poc:build:production"
+            "buildTarget": "service-a:build:production"
           }
         },
         "lint": {
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-            "config": "apps/monorepo-poc/.eslintrc",
+            "config": "apps/service-a/.eslintrc",
             "tsConfig": [
-              "apps/monorepo-poc/tsconfig.json",
-              "apps/monorepo-poc/tsconfig.spec.json"
+              "apps/service-a/tsconfig.json",
+              "apps/service-a/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/monorepo-poc/**"]
+            "exclude": ["**/node_modules/**", "!apps/service-a/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/monorepo-poc/jest.config.js",
-            "tsConfig": "apps/monorepo-poc/tsconfig.spec.json",
+            "jestConfig": "apps/service-a/jest.config.js",
+            "tsConfig": "apps/service-a/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }
       }
     },
-    "monorepo-poc-e2e": {
-      "root": "apps/monorepo-poc-e2e",
-      "sourceRoot": "apps/monorepo-poc-e2e/src",
+    "service-a-e2e": {
+      "root": "apps/service-a-e2e",
+      "sourceRoot": "apps/service-a-e2e/src",
       "projectType": "application",
       "architect": {
         "e2e": {
           "builder": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/monorepo-poc-e2e/cypress.json",
-            "tsConfig": "apps/monorepo-poc-e2e/tsconfig.e2e.json",
-            "devServerTarget": "monorepo-poc:serve"
+            "cypressConfig": "apps/service-a-e2e/cypress.json",
+            "tsConfig": "apps/service-a-e2e/tsconfig.e2e.json",
+            "devServerTarget": "service-a:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "monorepo-poc:serve:production"
+              "devServerTarget": "service-a:serve:production"
             }
           }
         },
@@ -87,9 +87,156 @@
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-            "config": "apps/monorepo-poc-e2e/.eslintrc",
-            "tsConfig": ["apps/monorepo-poc-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/monorepo-poc-e2e/**"]
+            "config": "apps/service-a-e2e/.eslintrc",
+            "tsConfig": ["apps/service-a-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/service-a-e2e/**"]
+          }
+        }
+      }
+    },
+    "service-b": {
+      "root": "apps/service-b",
+      "sourceRoot": "apps/service-b",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/next:build",
+          "options": {
+            "root": "apps/service-b",
+            "outputPath": "dist/apps/service-b"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/next:dev-server",
+          "options": {
+            "buildTarget": "service-b:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "service-b:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "builder": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "service-b:build:production"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/service-b/.eslintrc",
+            "tsConfig": [
+              "apps/service-b/tsconfig.json",
+              "apps/service-b/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/service-b/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/service-b/jest.config.js",
+            "tsConfig": "apps/service-b/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "service-b-e2e": {
+      "root": "apps/service-b-e2e",
+      "sourceRoot": "apps/service-b-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/service-b-e2e/cypress.json",
+            "tsConfig": "apps/service-b-e2e/tsconfig.e2e.json",
+            "devServerTarget": "service-b:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "service-b:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/service-b-e2e/.eslintrc",
+            "tsConfig": ["apps/service-b-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/service-b-e2e/**"]
+          }
+        }
+      }
+    },
+    "shared-components": {
+      "root": "libs/shared-components",
+      "sourceRoot": "libs/shared-components/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared-components/tsconfig.lib.json",
+              "libs/shared-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/shared-components/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/shared-components/jest.config.js",
+            "tsConfig": "libs/shared-components/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "http-client": {
+      "root": "libs/http-client",
+      "sourceRoot": "libs/http-client/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/http-client/.eslintrc",
+            "tsConfig": [
+              "libs/http-client/tsconfig.lib.json",
+              "libs/http-client/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/http-client/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/http-client/jest.config.js",
+            "tsConfig": "libs/http-client/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }

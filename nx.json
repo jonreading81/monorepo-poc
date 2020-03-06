@@ -1,5 +1,5 @@
 {
-  "npmScope": "happynrwl",
+  "npmScope": "monorepo-poc",
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": {
@@ -11,12 +11,25 @@
     "nx.json": "*"
   },
   "projects": {
-    "monorepo-poc": {
+    "service-a": {
       "tags": []
     },
-    "monorepo-poc-e2e": {
+    "service-a-e2e": {
       "tags": [],
-      "implicitDependencies": ["monorepo-poc"]
+      "implicitDependencies": ["service-a"]
+    },
+    "service-b": {
+      "tags": []
+    },
+    "service-b-e2e": {
+      "tags": [],
+      "implicitDependencies": ["service-b"]
+    },
+    "shared-components": {
+      "tags": []
+    },
+    "http-client": {
+      "tags": []
     }
   }
 }

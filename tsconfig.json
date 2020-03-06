@@ -15,7 +15,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@monorepo-poc/shared-components": [
+        "libs/shared-components/src/index.ts"
+      ],
+      "@monorepo-poc/http-client": ["libs/http-client/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
