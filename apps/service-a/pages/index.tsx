@@ -5,7 +5,7 @@ import { GET } from '@monorepo-poc/http-client';
 import React from 'react';
 export const Index = () => {
   useEffect(() => {
-    GET('fetch data');
+    GET('fetch data test');
   }, []);
 
   return (
