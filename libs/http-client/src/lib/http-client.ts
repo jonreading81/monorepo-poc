@@ -1,1 +1,1 @@
-export const GET = args => console.log('http-client-change', args);
+export const GET = args => console.log('http-client-chan', args);
